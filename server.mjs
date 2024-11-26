@@ -9,6 +9,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import indexRouter from './routes/index.mjs';
 import authorRouter from './routes/authors.mjs';
+import bookRouter from './routes/books.mjs';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
@@ -33,5 +34,6 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);
+app.use('/books', bookRouter);
 
 app.listen(process.env.PORT || 3000)

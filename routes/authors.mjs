@@ -1,6 +1,8 @@
 import express from 'express';
 import Author from '../models/author.mjs';
+
 const router = express.Router();
+
 
 
 // All  Authors Route
@@ -30,14 +32,23 @@ router.get('/new', (req, res) => {
 
 // Create New Author
 router.post('/', async (req, res) => {
-    const author = new Author({
-        name: req.body.name,
-    });
+    // const author = new Author({
+    //     name: req.body.name,
+    // });
 
+    // try {
+    //     const newAuthor = await author.save()
+    //     // res.redirect(`authors/${newAuthor.id}`);
+    //     res.redirect('authors')
     try {
-        const newAuthor = await author.save()
-        // res.redirect(`authors/${newAuthor.id}`);
-        res.redirect('authors')
+        const name = req.body.name?.trim();
+        if (!name) {
+            return res.status(400).send('Author name is required.');
+        }
+
+        const author = new Author({ name });
+        await author.save();
+        res.redirect('/authors')
     } catch (e) {
         console.error("Error creating author:", e);
         res.render('authors/new', {

@@ -1,2 +1,7 @@
+<h2>Recently Added</h2>
 
-kkdnurbub
+<div>    
+    <% books.forEach(book => { %>
+        <img src="<%= book.coverImagePath ||  '/public/uploads/bookCovers/1733a589f5f26cac0729a4444972a0aa' %>" alt="" height="150" width="100">
+        <% }); %>
+</div>
